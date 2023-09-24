@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import qs from "query-string";
 import { Category } from "@prisma/client"
 import { useRouter, useSearchParams } from "next/navigation";
