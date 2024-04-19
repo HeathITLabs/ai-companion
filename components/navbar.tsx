@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { UserButton } from "@clerk/nextjs";
 import { Poppins } from "next/font/google";
 import { Sparkles } from "lucide-react";
 
@@ -39,7 +38,6 @@ export const Navbar = ({
           </Button>
         )}
         <ModeToggle />
-        <UserButton afterSignOutUrl="/" />
       </div>
     </div>
   );
