@@ -1,6 +1,5 @@
 import dotenv from "dotenv";
 import { StreamingTextResponse, LangChainStream } from "ai";
-import { auth, currentUser } from "@clerk/nextjs";
 import { Replicate } from "langchain/llms/replicate";
 import { CallbackManager } from "langchain/callbacks";
 import { NextResponse } from "next/server";
@@ -17,9 +16,9 @@ export async function POST(
 ) {
   try {
     const { prompt } = await request.json();
-    const user = await currentUser();
+    const user = "user";
 
-    if (!user || !user.firstName || !user.id) {
+    if (!user ) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
@@ -39,7 +38,7 @@ export async function POST(
           create: {
             content: prompt,
             role: "user",
-            userId: user.id,
+            userId: "user",
           },
         },
       }
@@ -54,7 +53,7 @@ export async function POST(
 
     const companionKey = {
       companionName: name!,
-      userId: user.id,
+      userId: user,
       modelName: "llama2-13b",
     };
     const memoryManager = await MemoryManager.getInstance();
@@ -135,7 +134,7 @@ export async function POST(
             create: {
               content: response.trim(),
               role: "system",
-              userId: user.id,
+              userId: user,
             },
           },
         }

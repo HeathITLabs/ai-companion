@@ -4,7 +4,6 @@ import axios from "axios";
 import { ChevronLeft, Edit, MessagesSquare, MoreVertical, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Companion, Message } from "@prisma/client";
-import { useUser } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
 import { BotAvatar } from "@/components/bot-avatar";
@@ -29,7 +28,7 @@ export const ChatHeader = ({
   companion,
 }: ChatHeaderProps) => {
   const router = useRouter();
-  const { user } = useUser();
+  const user = "user";
   const { toast } = useToast();
 
   const onDelete = async () => {
