@@ -1,4 +1,4 @@
-import { auth, currentUser } from "@clerk/nextjs";
+
 import { NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
@@ -7,10 +7,10 @@ import { checkSubscription } from "@/lib/subscription";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const user = await currentUser();
+    const user = "";
     const { src, name, description, instructions, seed, categoryId } = body;
     console.dir("body: " + body)
-    if (!user || !user.id || !user.firstName) {
+    if (!user) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
@@ -27,8 +27,8 @@ export async function POST(req: Request) {
     const companion = await prismadb.companion.create({
       data: {
         categoryId,
-        userId: user.id,
-        userName: user.firstName,
+        userId: "0",
+        userName: "user.firstName",
         src,
         name,
         description,
